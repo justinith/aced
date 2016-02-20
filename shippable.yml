@@ -1,0 +1,10 @@
+# language-settings
+language: node_js
+
+# versions
+node_js:
+   - 4.3.0
+
+# test-commands
+script:
+   - npm test
