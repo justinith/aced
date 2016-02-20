@@ -1,0 +1,14 @@
+{
+  "name": "aced",
+  "version": "1.0.0",
+  "description": "Aced Automated Text Based Model",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
+}
