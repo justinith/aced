@@ -11,7 +11,8 @@ var User = new Sequelize('user', {
 		field: 'name',
 	},
 	stripeId: {
-		type: Sequelize.STRING
+		type: Sequelize.STRING,
+		field: 'stripeId'
 	}
 });
 
