@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width">
+		<title>ACED Admin Tool</title>
+		<link rel="shortcut icon" href="img/favicon.ico">
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<script type="text/javascript" src="js/script.js"></script>
+	</head>
+	<body>
+		<div class="sidebar">
+			<img class="logo" src="img/aced_logo_white.png">
+			<div class="listOfTools">
+				<div class="toolButton">Create New Tutor +</div>
+			</div>
+		</div>
+		<div class="mainArea">
+			<div id="newTutorSection">
+				
+				<div class="newTutorForm">
+					<h2><i class="fa fa-user-plus"></i> Create new tutor</h2>
+					<div class="basicInfoForm">
+						<input id="fName" type='text' placeholder="First Name">
+						<input id="lName" type='text' placeholder="Last Name">
+						<input id="email" type='text' placeholder="Email">
+						<input id="phone" type='text' placeholder="Phone Number"><br>
+						<textarea id="desc" placeholder="Description"></textarea>
+					</div>
+					<div class="addClassForm">
+						<div class="listOfClasses">
+						</div>
+						<select id="classSelect">
+							<option>select class</option>
+							<option data-cID="1">MATH 124</option>
+							<option data-cID="2">MATH 125</option>
+							<option data-cID="3">MATH 126</option>
+							<option data-cID="4">MATH 307</option>
+							<option data-cID="5">MATH 308</option>
+							<option data-cID="6">PHYS 121</option>
+							<option data-cID="7">PHYS 122</option>
+							<option data-cID="8">PHYS 123</option>
+							<option data-cID="9">CSE 142</option>
+							<option data-cID="10">CSE 143</option>
+							<option data-cID="11">CHEM 142</option>
+							<option data-cID="12">CHEM 152</option>
+							<option data-cID="13">CHEM 162</option>
+							<option data-cID="14">BIOL 180</option>
+							<option data-cID="15">BIOL 200</option>
+							<option data-cID="16">BIOL 220</option>
+						</select>
+						<input id="classGPA" type="text" placeholder="GPA">
+						<input id="classInstructor" type="text" placeholder="Instructor">
+						<input id="qy" type="text" placeholder="Quarter/Year">
+						<div class="submitAddClass">+</div>
+					</div>
+					<div class="submitButton pointerHover">ADD TUTOR</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
