@@ -8,11 +8,4 @@ router.get('/', function(req, res) {
     });
 });
 
-router.get('/tutors', function(req, res) {
-    res.json({
-        name : 'John',
-        classes : ['CSE 142','MATH 124']
-    });
-});
-
 module.exports = router;

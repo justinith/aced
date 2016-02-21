@@ -1,11 +1,12 @@
 var Sequelize = require('sequelize');
 var sequelize = new Sequelize('postgres://postgres:nonosqlbutpostgres@localhost:5432/main');
 
-var User = sequelize.define('tutor', {
+var Tutor = sequelize.define('tutor', {
     id: {
-        type: Sequelize.STRING,
+        type: Sequelize.UUID,
         field: 'id',
-        primaryKey: true
+        primaryKey: true,
+        defaultValue: Sequelize.UUIDV4
     },
     firstName: {
         type: Sequelize.STRING,
@@ -32,15 +33,6 @@ var User = sequelize.define('tutor', {
         field: 'email',
         allowNull: false
     },
-    schoolID : {
-        type: Sequelize.STRING,
-        field: 'school_id',
-        references : {
-            model : school,
-            key : 'id'
-        },
-        allowNull : true
-    },
     classes : {
         type: Sequelize.ARRAY(Sequelize.TEXT),
         field: 'classes',
@@ -48,4 +40,14 @@ var User = sequelize.define('tutor', {
     },
 });
 
-module.exports = User;
+Tutor.sync({force: true}).then(function () {
+    // Table created
+    return Tutor.create({
+        firstName:"Bill",
+        lastName:"Gates",
+        phoneNumber:"2066973778",
+        email:"justin.ith12@gmail.com"
+    });
+});
+
+module.exports = Tutor;
