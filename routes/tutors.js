@@ -3,7 +3,7 @@ var router = express.Router();
 var Sequelize = require('sequelize');
 var sequelize = new Sequelize('postgres://postgres:nonosqlbutpostgres@localhost:5432/main');
 var Tutors = require('../models/tutor');
-
+var Classes = require('../models/class');
 
 router.get('/', function(req, res) {
     res.json({

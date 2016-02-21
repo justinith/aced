@@ -34,7 +34,7 @@ var Tutor = sequelize.define('tutor', {
         allowNull: false
     },
     takenClasses : {
-        type: Sequelize.JSON,
+        type: Sequelize.JSONB,
         field: 'takenClasses',
         allowNull : true
     }

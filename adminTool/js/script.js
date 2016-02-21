@@ -1,6 +1,6 @@
 (function() {
 
-	var newTutorClassList = {};
+	var newTutorClassList = [];
 
     window.onload = function(){
     	initListeners();
@@ -42,8 +42,9 @@
 		classObj['gpa'] = gpa;
 		classObj['instructor'] = instructor;
 		classObj['qy'] = qy;
+		classObj['id'] = courseID;
 
-		newTutorClassList[courseID] = classObj;
+		newTutorClassList.push(classObj);
 
 		// Renders and adds class to list
 		var classString = '<div class="addedClass"><p>' + courseName + ' / ' + gpa + ' / ' + instructor + ' / ' + qy + '</p></div>'
