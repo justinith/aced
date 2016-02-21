@@ -12,16 +12,27 @@ router.get('/', function(req, res) {
     });
 });
 
-router.post('/create', function(req, res) {
+router.get('/tutorinfo/:id', function(req, res) {
+    Tutors.findAll({
+    	where: {
+    		id: req.params.id
+    	}
+	}).then(function(tutor){
+    	res.send(tutor);
+    });
+});
 
+router.post('/create', function(req, res) {
     // Get all the attributes from the sent JSON
     var first = req.body.firstname;
     var last = req.body.lastname;
     var cell = req.body.cell;
     var email = req.body.email;
+    var desc = req.body.desc;
+    var theClasses = req.body.takenClasses;
 
     // Add new tutor to DB
-    Tutors.create({firstName: first, lastName: last, phoneNumber: cell, email: email}).then(function(tutor) {
+    Tutors.create({firstName: first, takenClasses: theClasses, lastName: last, phoneNumber: cell, email: email, description: desc}).then(function(tutor) {
         res.send(tutor);
     });
 });

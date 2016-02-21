@@ -33,21 +33,11 @@ var Tutor = sequelize.define('tutor', {
         field: 'email',
         allowNull: false
     },
-    classes : {
-        type: Sequelize.ARRAY(Sequelize.TEXT),
-        field: 'classes',
+    takenClasses : {
+        type: Sequelize.JSON,
+        field: 'takenClasses',
         allowNull : true
-    },
-});
-
-Tutor.sync({force: true}).then(function () {
-    // Table created
-    return Tutor.create({
-        firstName:"Bill",
-        lastName:"Gates",
-        phoneNumber:"2066973778",
-        email:"justin.ith12@gmail.com"
-    });
+    }
 });
 
 module.exports = Tutor;
