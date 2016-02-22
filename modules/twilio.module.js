@@ -7,6 +7,7 @@ var authToken = '4ad97748c64ed6b6af5d9ac9c5e9d1f1';
 var phoneNumber = '+16505420375';
 
 var client = require('twilio')(accountSid, authToken);
+var twilio = require('twilio');
 
 // Pre: Takes in a number and message.
 // Post: Send the message to the phone number and takes care of edge case.
@@ -33,4 +34,12 @@ exports.mms = function(to, msg, media, response) {
         if(err) response(err);
         response(messgae.sid);
     });
+}
+
+exports.reciever = function(req, res) {
+    var twiml = new twilio.TwimlResponse();
+    twiml.sms('Hello, Welcome to Aced! We are currently building the product');
+
+    res.writeHead(200, {'Content-Type': 'text/xml'});
+    res.end(twiml.toString());
 }
