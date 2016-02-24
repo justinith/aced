@@ -5,8 +5,8 @@ var twilio = require('../modules/twilio.module');
 
 router.get('/', function(req, res) {
     res.json({
-        status : 200,
-        msg : 'Hello World'
+        status: 200,
+        msg: 'Hello World'
     });
 });
 
