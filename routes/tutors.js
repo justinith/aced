@@ -5,7 +5,7 @@ var sequelize = new Sequelize('postgres://postgres:nonosqlbutpostgres@localhost:
 var Tutors = require('../models/tutor');
 var Classes = require('../models/class');
 var sendgrid  = require('sendgrid')('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');
-
+var Receipts = require('../modules/receipt.module');
 
 router.get('/', function(req, res) {
     res.json({
@@ -39,48 +39,7 @@ router.post('/create', function(req, res) {
     });
 });
 
-router.get('/email/:emailAddress', function(req,res){
-
-    var Email = sendgrid.Email;
-
-    var from_address = "elon@tesla.com";
-
-    // YOUR TO ADDRESS(ES)
-    var to_address = req.params.emailAddress;
-
-    // SUBJECT
-    var subject = "ACED Recepit";
-
-    // TEXT BODY
-    var text_body = "Please get in touch with us if you have any concerns or questions about your session charge or any other inquiries.";
-
-    // HTML BODY
-    var html_body = "Please get in touch with us if you have any concerns or questions about your session charge or any other inquiries.";
-
-    var email = new Email({
-        to:         to_address,
-        from:       from_address,
-        subject:    subject,
-        text:       text_body,
-        html:       html_body
-    });
-
-    var recipients = [
-        req.params.emailAddress
-    ];
-    for (var i = 0; i < recipients.length; i++) {
-        email.addTo(recipients[i]);
-    }
-
-    // ADD THE CATEGORIES
-    var categories = [
-        "Recepit"
-    ];
-    for (var i = 0; i < categories.length; i++) {
-        email.addCategory(categories[i]);
-    }
-
-    // ADD THE SUBSTITUTION VALUES
+router.get('/test', function(req,res){
     var subs = {
         "%name%": [
             "Ayush"
@@ -113,24 +72,10 @@ router.get('/email/:emailAddress', function(req,res){
             "2/24/16"
         ]
     };
-    for (var tag in subs) {
-        email.addSubstitution(tag, subs[tag]);
-    }
 
-        email.setFilters({
-            'templates': {
-                'settings': {
-                    'enable': 1,
-                    'template_id' : '3ac9aa8e-3004-4aeb-b52c-f4bf0e48aa68',
-                }
-            }
-        });
+    Receipts.sendReceipt('ayush29f@uw.edu', subs);
 
-        sendgrid.send(email, function(err, json) {
-          if (err) { return console.error(err); }
-          console.log(json);
-          res.send('Sent to ' + to_address + '!');
-        });
-    });
+    res.send('hello');
+});
 
 module.exports = router;
