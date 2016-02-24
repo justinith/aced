@@ -34,3 +34,11 @@ exports.mms = function(to, msg, media, response) {
         response(messgae.sid);
     });
 }
+
+exports.reciever = function(req, res) {
+    var twiml = new twilio.TwimlResponse();
+    twiml.sms('Hello, Welcome to Aced! We are currently building the product');
+
+    res.writeHead(200, {'Content-Type': 'text/xml'});
+    res.end(twiml.toString());
+}

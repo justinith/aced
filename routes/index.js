@@ -10,6 +10,4 @@ router.get('/', function(req, res) {
     });
 });
 
-router.post('/sms', twilio.reciever);
-
 module.exports = router;
