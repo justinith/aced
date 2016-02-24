@@ -39,14 +39,14 @@ router.post('/create', function(req, res) {
     });
 });
 
-router.get('/email', function(req,res){
+router.get('/email/:emailAddress', function(req,res){
 
     var Email = sendgrid.Email;
 
-    var from_address = "team@justaced.com";
+    var from_address = "elon@tesla.com";
 
     // YOUR TO ADDRESS(ES)
-    var to_address = "justin.ith12@gmail.com";
+    var to_address = req.params.emailAddress;
 
     // SUBJECT
     var subject = "ACED Recepit";
@@ -66,7 +66,7 @@ router.get('/email', function(req,res){
     });
 
     var recipients = [
-        "justin.ith12@gmail.com"
+        req.params.emailAddress
     ];
     for (var i = 0; i < recipients.length; i++) {
         email.addTo(recipients[i]);
