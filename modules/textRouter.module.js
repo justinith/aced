@@ -2,6 +2,8 @@ var natural = require('natural');
 var states = require('./states');
 var twilio = require('./twilio.module');
 
+var tokenizer = new natural.WordTokenizer();
+
 var roles = {
     ADMIN: 'admin',
     TUTOR: 'tutor',
@@ -25,14 +27,20 @@ var textRouter = {
     generateResponse : function(sender, msg, cookie, callback) {
         // use the role identifier
         // user
-        console.log(cookie);
-        console.log(textRouter.roleIdentifier(sender, msg));
-        if(textRouter.roleIdentifier(sender, msg) === roles.USER) {
+        var senderRole = textRouter.roleIdentifier(sender, msg);
+        if(senderRole === roles.USER) {
             textRouter.userTextHandeler(sender, msg);
             if(!cookie) { // first message from the user
                 callback('Hello, thanks for your message, we will get in touch asap.', 2);
             } else {
                 callback('Hello Again Mr.', cookie);
+            }
+        } else if(senderRole === roles.ADMIN) {
+            if(textRouter.isAdminResponse(msg) && msg.substring(17) != '') {
+                twilio.sms(msg.substring(3, 15), msg.substring(17), function(err, message){
+                    if(err) console.log(err);
+                    callback('Message Delivered to ' + msg.substring(3, 15));
+                });
             }
         }
     },
@@ -46,6 +54,9 @@ var textRouter = {
     },
     canParse: function() {
         return false;
+    },
+    isAdminResponse: function(msg) {
+        return true;
     }
 }
 
