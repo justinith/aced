@@ -1,8 +1,8 @@
-var Sequelize = require('sequelize')
-
+var Sequelize = require('sequelize');
+var sequelize = new Sequelize('postgres://postgres:nonosqlbutpostgres@localhost:5432/main');
 var User = require('./User');
 
-var Request = new Sequelize('request', {
+var Request = sequelize.define('request', {
 	id: {
 		type: Sequelize.UUID,
 		primaryKey: true,
@@ -11,10 +11,6 @@ var Request = new Sequelize('request', {
 	userId: {
 		type: Sequelize.STRING,
 		field: 'userId',
-		references: {
-			model: User,
-			key: 'id'
-		}
 	},
 	subject: {
 		type: Sequelize.STRING,

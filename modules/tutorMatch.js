@@ -1,6 +1,7 @@
-var Sequalize = require('sequalize');
-var Tutors = require('../models/tutors');
+var Sequelize = require('sequelize');
+var sequelize = new Sequelize('postgres://postgres:nonosqlbutpostgres@localhost:5432/main');
 var Classes = require('../models/class');
+var Tutors = require('../models/tutor');
 
 module.exports = {
 	tutorMatch: function(request) {
@@ -12,33 +13,46 @@ module.exports = {
 		of those, return 5 who are available now
 		
 	**/
-		var subjectId = Classes.findOne({
+		var subjectId;
+
+
+		// find classes first
+		Classes.findOne({
 			where: {
-				display_name: request.subject
+				display_name: request.subject.toUpperCase()
 			}
 		}).then(function(id) {
-			console.log('The subject id is'+ id.id);
+			console.log('The subject id is '+ id.id);
+			subjectId = id.id;
+
+
+			// search tutors that teach the class
+			Tutors.findAll({
+				where: {
+					takenClasses: {
+						$contains: {
+							id: subjectId
+						}
+					}
+				}
+
+			});
 		});
 
-		console.log('The subject id is'+ subjectId);
-		// Tutors.findAll({
-		// 	where: {
-		// 		takenClasses: {
-		// 			$contains: {
-		// 				id: subjectId.id
-		// 			}
-		// 		},
-		// 		status: 'active',
-		// 		'schedule[0][0]': true
-		// 	}
-
-		// });
+		// add these lines in once the tutor model updated
+		// ,
+		// 			status: 'active',
+		// 			'schedule[0][0]': true
 	},
+	// pre: takes in date of tutor request
+	// post: returns the index of where the date is in 2d array
 	dateTimeIndex: function(date) {
 		var dateTime = new Date(date);
 		dateTime = dateTime.getMinutes() + dateTime.getUTCHours() * 2;
 		return dateTime;
 	},
+	// pre: takes in date of tutor request
+	// post: returns the day as a integer 0-6
 	dateTimeDay: function(date) {
 		var dateDay = new Date(date);
 		return dateDay.getDay();
