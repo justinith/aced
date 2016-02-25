@@ -1,4 +1,4 @@
-var Sequelize = require(sequelize)
+var Sequelize = require('sequelize')
 
 var User = require('./User');
 
@@ -20,11 +20,11 @@ var Request = new Sequelize('request', {
 		type: Sequelize.STRING,
 		field: 'subject'
 	},
-	location {
+	location: {
 		type: Sequelize.STRING,
 		field: 'location'
 	},
-	dateTime {
+	dateTime: {
 		type: Sequelize.DATE,
 		field: 'dateTime'
 	},

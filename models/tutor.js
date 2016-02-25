@@ -37,6 +37,11 @@ var Tutor = sequelize.define('tutor', {
         type: Sequelize.JSONB,
         field: 'takenClasses',
         allowNull : true
+    },
+    schedule : {
+        type: Sequelize.ARRAY(Sequelize.ARRAY(Sequelize.BOOLEAN)),
+        field: 'schedule',
+        allowNull: false
     }
 });
 
