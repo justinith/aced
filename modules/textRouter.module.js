@@ -21,3 +21,11 @@ exports.roleIdentifier = function(from, msg) {
     return roles.USER;
 }
 
+exports.generateResponse = function(from, msg, callback) {
+    var response = 'Hello World';
+    callback(response, 1);
+}
+
+exports.firstMessageResponse = function(text) {
+
+}
