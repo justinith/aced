@@ -32,12 +32,9 @@ var Tutor = sequelize.define('tutor', {
         type: Sequelize.STRING,
         field: 'email',
         allowNull: false
-    },
-    takenClasses : {
-        type: Sequelize.JSONB,
-        field: 'takenClasses',
-        allowNull : true
     }
 });
+
+// Tutor.sync({force: true});
 
 module.exports = Tutor;
