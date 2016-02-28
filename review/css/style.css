@@ -1,0 +1,95 @@
+body {
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+	font-weight: 200;
+	height: 100%;
+	background-color: white;
+	font-family: 'Helvetica Neue';
+	color: #525252;
+}
+
+h1 {
+	text-align: center;
+	color: #27BAD5;
+}
+
+h2, h3 {
+	font-weight: 200;
+	text-align: center;
+	font-size: 1.1em;
+}
+
+.content {
+	background: url(../img/uwbg.png) center center no-repeat;
+	background-size: cover;
+	height: 100vh;
+}
+
+.header {
+	background: white;
+	text-align: center;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	border-bottom: solid 2px #27BAD5;
+	width: 100%;
+}
+	.header img {
+		height: 17px;
+	}
+
+h2 {
+	margin-top: 6vh;
+	margin-bottom: 6vh;
+}
+
+textarea {
+	width: 100%;
+	background: rgba(255,255,255,0.8);
+	resize: none;
+	border-top: solid 2px #E5E5E5;
+	border-bottom: solid 2px #E5E5E5;
+	border-right: none;
+	border-left: none;
+	font-size: 0.9em;
+	margin-top: 25px;
+	padding: 10px;
+}
+	textarea:focus {
+		outline: none;
+	}
+
+.starHolder {
+	text-align: center;
+}
+	.starHolder i {
+		font-size: 20pt;
+		padding-right: 5px;
+		padding-left: 5px;
+		color: #27BAD5;
+	}
+
+.submit {
+	width: 100%;
+	background-color: #27BAD5;
+	text-align: center;
+	color: white;
+	padding-top: 3.5vh;
+	padding-bottom: 3.5vh;
+	font-size: 17px;
+}
+
+.sendSection, .finishPage {
+	display: none;
+}
+
+#email {
+	width: 100%;
+	font-size: 0.9em;
+	padding: 10px;
+}
+
+@-ms-viewport{
+  width: device-width;
+}
+

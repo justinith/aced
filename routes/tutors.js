@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var Sequelize = require('sequelize');
 var sequelize = new Sequelize('postgres://postgres:nonosqlbutpostgres@localhost:5432/main');
-var sendgrid  = require('sendgrid')('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');
 
 var Tutors = require('../models/tutor');
 var Classes = require('../models/class');
@@ -55,45 +54,6 @@ router.post('/create', function(req, res) {
 
         res.send(tutor);
     });
-});
-
-router.get('/test', function(req,res){
-    var subs = {
-        "%name%": [
-            "Ayush"
-        ],
-        "%class%": [
-            "CSE 373"
-        ],
-        "%location%": [
-            "Suzz"
-        ],
-        "%start_time%": [
-            "10:59pm"
-        ],
-        "%end_time%": [
-            "11:56pm"
-        ],
-        "%tutor_name%": [
-            "Justin I."
-        ],
-        "%blocks%": [
-            "3"
-        ],
-        "%subtotal": [
-            "30"
-        ],
-        "%total%": [
-            "31.20"
-        ],
-        "%date%": [
-            "2/24/16"
-        ]
-    };
-
-    Receipts.sendReceipt('ayush29f@uw.edu', subs);
-
-    res.send('hello');
 });
 
 module.exports = router;

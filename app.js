@@ -12,6 +12,8 @@ var redisClient = redis.createClient();
 var app = express();
 var routes = require('./routes/index');
 var tutors = require('./routes/tutors');
+var reviews = require('./routes/reviews');
+var receipts = require('./routes/receipts');
 
 // app config
 app.use(logger('dev'));
@@ -34,5 +36,7 @@ app.use(bodyParser.json());
 // app routes
 app.use('/', routes);
 app.use('/tutors', tutors);
+app.use('/reviews', reviews);
+app.use('/receipts', receipts);
 
 module.exports = app;
