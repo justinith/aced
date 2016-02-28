@@ -1,6 +1,7 @@
-var Sequelize = require(sequelize)
+var Sequelize = require('sequelize')
+var sequelize = new Sequelize('postgres://postgres:nonosqlbutpostgres@localhost:5432/main');
 
-var User = new Sequelize('user', {
+var User = sequelize.define('user', {
 	id: {
 		type: Sequelize.STRING,
 		field: 'id',
