@@ -32,9 +32,10 @@ router.post('/create', function(req, res) {
     var email = req.body.email;
     var desc = req.body.desc;
     var theClasses = req.body.takenClasses;
+    var schedule = req.body.schedule;
 
     // Add new tutor to DB
-    Tutors.create({firstName: first, takenClasses: theClasses, lastName: last, phoneNumber: cell, email: email, description: desc}).then(function(tutor) {
+    Tutors.create({firstName: first, takenClasses: theClasses, lastName: last, phoneNumber: cell, email: email, description: desc, schedule: schedule}).then(function(tutor) {
         res.send(tutor);
     });
 });
