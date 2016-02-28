@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser')
 
 var redis = require('redis');
 var session = require('express-session');
@@ -16,6 +17,7 @@ var tutors = require('./routes/tutors');
 // app config
 app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cookieParser());
 app.use(session({
     secret: 'acedisgonnarocktheworldbruh',
     store: new redisStore({

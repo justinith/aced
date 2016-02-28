@@ -9,5 +9,5 @@ router.get('/', function(req, res) {
         msg: 'Hello World'
     });
 });
-
+router.post('/sms', twilio.reciever);
 module.exports = router;

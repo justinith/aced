@@ -27,7 +27,7 @@ var Request = new Sequelize('request', {
 	dateTime {
 		type: Sequelize.DATE,
 		field: 'dateTime'
-	},
+	}
 });
 
 module.exports = Request;
