@@ -10,6 +10,11 @@ var roles = {
     USER: 'user'
 };
 
+var adminResponse = {
+    REPLY: 'reply',
+    REQUEST: 'request'
+}
+
 var ADMINS = ['+19095662233'];
 
 var textRouter = {
@@ -36,12 +41,16 @@ var textRouter = {
                 callback('Hello Again Mr.', cookie);
             }
         } else if(senderRole === roles.ADMIN) {
-            if(textRouter.isAdminResponse(msg) && msg.substring(17) != '') {
+            if(textRouter.adminResponseType(msg) == adminResponse.REPLY && msg.substring(17) != '') {
                 twilio.sms(msg.substring(3, 15), msg.substring(17), function(err, message){
                     if(err) console.log(err);
                     callback('Message Delivered to ' + msg.substring(3, 15));
                 });
+            } else if(textRouter.adminResponseType(msg) == adminResponse.REQUEST) {
+                callback(msg);
             }
+        } else if(senderRole === roles.TUTOR) {
+            console.log(roles.TUTOR);
         }
     },
     userTextHandeler : function(sender, msg) {
@@ -55,8 +64,22 @@ var textRouter = {
     canParse: function() {
         return false;
     },
-    isAdminResponse: function(msg) {
-        return true;
+    adminResponseType: function(msg) {
+        if(msg.substring(0,2) == 're') {
+            return adminResponse.REPLY;
+        } else {
+            // TODO: make it more detail based on the format
+            return adminResponse.REQUEST;
+        }
+    },
+    parseRequest: function(sender, msg) {
+        // TODO: make it more detailed, edge cases etc...
+        return {
+            user: sender,
+            course: 'MATH124',
+            place: 'Alder Commons',
+            time: Date.now()
+        }
     }
 }
 

@@ -42,6 +42,7 @@ exports.reciever = function(req, res) {
     var msg = req.body.Body;
     var convoID = req.cookies ? req.cookies.convoID : undefined;
 
+    console.log('recieved text from ' + sender);
     textRouter.generateResponse(sender, msg, convoID, function(response, cookie) {
         twiml.sms(response);
         if(cookie) res.cookie('convoID', cookie);
