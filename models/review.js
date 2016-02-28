@@ -1,40 +1,38 @@
 var Sequelize = require('sequelize');
 var sequelize = new Sequelize('postgres://postgres:nonosqlbutpostgres@localhost:5432/main');
 
-var Tutor = sequelize.define('tutor', {
+var Reviews = sequelize.define('reviews', {
     id: {
         type: Sequelize.UUID,
         field: 'id',
         primaryKey: true,
         defaultValue: Sequelize.UUIDV4
     },
-    firstName: {
+    tutorID: {
         type: Sequelize.STRING,
-        field: 'first_name',
+        field: 'tutor_id',
         allowNull: false
     },
-    lastName: {
+    userID: {
         type: Sequelize.STRING,
-        field: 'last_name',
+        field: 'user_id',
         allowNull: false
     },
-    description: {
+    sessionID: {
         type: Sequelize.STRING,
-        field: 'description',
+        field: 'session_id',
+        allowNull: false
+    },
+    rating: {
+        type: Sequelize.INTEGER,
+        field: 'rating',
         allowNull: true
     },
-    phoneNumber: {
+    text: {
         type: Sequelize.STRING,
-        field: 'phone_number',
-        allowNull: false
-    },
-    email: {
-        type: Sequelize.STRING,
-        field: 'email',
-        allowNull: false
+        field: 'text',
+        allowNull: true
     }
 });
 
-// Tutor.sync({force: true});
-
-module.exports = Tutor;
+module.exports = Reviews;
