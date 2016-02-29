@@ -2,7 +2,7 @@ var Sequelize = require('sequelize');
 var sequelize = new Sequelize('postgres://postgres:nonosqlbutpostgres@localhost:5432/main');
 var User = require('./User');
 
-var Request = sequelize.define('request', {
+var Request = sequelize.define('Request', {
 	id: {
 		type: Sequelize.UUID,
 		primaryKey: true,

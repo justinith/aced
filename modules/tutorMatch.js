@@ -17,7 +17,7 @@ module.exports = {
 
 
 		// find classes first
-		return Classes.findOne({
+		Classes.findOne({
 			where: {
 				display_name: request.subject.toUpperCase()
 			}
@@ -39,12 +39,11 @@ module.exports = {
 							id: tutors[i].tutor_id
 						}
 					}).then(function(tutorOne) {
-						console.log(tutorOne.dataValues);
-						console.log('the tutor index is ' + tutorIndex);
 						fiveTutors[tutorIndex++] = tutorOne.dataValues.phoneNumber;
 						console.log(fiveTutors);
 					});
 				}
+				console.log("The five tutors are " + fiveTutors);
 			});
 
 		});
