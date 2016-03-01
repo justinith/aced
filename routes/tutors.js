@@ -2,8 +2,8 @@ var express = require('express');
 var router = express.Router();
 var Sequelize = require('sequelize');
 var sequelize = new Sequelize('postgres://postgres:nonosqlbutpostgres@localhost:5432/main');
-var Tutors = require('../models/tutor');
-var Classes = require('../models/class');
+var Tutors = require('../models/Tutors');
+var Courses = require('../models/Courses');
 var sendgrid  = require('sendgrid')('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');
 
 

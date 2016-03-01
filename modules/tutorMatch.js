@@ -1,7 +1,9 @@
 var Sequelize = require('sequelize');
-var sequelize = new Sequelize('postgres://postgres:nonosqlbutpostgres@localhost:5432/main');
-var Classes = require('../models/class');
-var Tutors = require('../models/tutor');
+var sequelize = new Sequelize('postgres://postgres:nonosqlbutpostgres@localhost:5432/test');
+var Courses = require('../models/Courses');
+var Tutors = require('../models/Tutors');
+var Schedule = require('../models/Schedules');
+var TutorCourses = require('../models/TutorCourses');
 
 module.exports = {
 	tutorMatch: function(request) {
@@ -13,63 +15,31 @@ module.exports = {
 		of those, return 5 who are available now
 		
 	**/
-		var subjectId;
 
+		var day = this.dateTimeDay(request.dateTime);
+		var timeIndex = this.dateTimeIndex(request.dateTime);
+		console.log("the day is " + day + " : " + timeIndex);
 
-		// find classes first
-		Classes.findOne({
-			where: {
-				display_name: request.subject.toUpperCase()
-			}
-		}).then(function(id) {
-			console.log('The subject id is '+ id.id);
-			subjectId = id.id;
-			var querySearch = 'SELECT * FROM "tutorClasses" WHERE class_id = ' + "'" + subjectId+"'";
-			sequelize.query(querySearch, { type: sequelize.QueryTypes.SELECT}).then(function(tutors) {
-				console.log(tutors.length);
-				var fiveTutors = [];
-				var tutorIndex = 0;
-				var length = tutors.length;
-				if(length > 5) length = 5;
-
-				for(var i = 0; i < length; i++) {
-					console.log(tutors[i].tutor_id);
-					Tutors.findOne({
-						where: {
-							id: tutors[i].tutor_id
-						}
-					}).then(function(tutorOne) {
-						fiveTutors[tutorIndex++] = tutorOne.dataValues.phoneNumber;
-						console.log(fiveTutors);
-					});
-				}
-				console.log("The five tutors are " + fiveTutors);
-			});
-
+		var querySearch = 'SELECT "Tutors"."id", "phone", "firstName", "lastName"' +
+    						'FROM "Tutors", "Courses", "TutorCourses", "Schedules"' +
+    						'WHERE "Tutors"."id"::"varchar" = "TutorCourses"."tutorID"' +
+    						'AND "Courses"."id"::"varchar" = "TutorCourses"."courseID"' +
+    						'AND "Courses"."code" = ' + "'" + request.subject + "' " +
+    						'AND "Schedules"."day" = ' + day + " " +
+    						'AND "Schedules"."timeSlots"[' + timeIndex + "] = true " +
+    						'AND "Schedules"."timeSlots"[' + (timeIndex +1) +"] = true " +
+    						'ORDER BY "TutorCourses"."gpa" DESC ' +
+    						'LIMIT 5;'
+		sequelize.query(querySearch, { type: sequelize.QueryTypes.SELECT}).then(function(tutors) {
+			console.log(tutors);
+			return tutors;
 		});
-			// search tutors that teach the class
-			// Tutors.findAll({
-			// 	where: {
-			// 		takenClasses: {
-			// 			$any: {
-			// 				id: subjectId
-			// 			}		
-			// 		}
-			// 	}
-
-			// }).then(function(tutor) {
-			// 	console.log(tutor);
-			// });
-		// add these lines in once the tutor model updated
-		// ,
-		// 			status: 'active',
-		// 			'schedule[0][0]': true
 	},
 	// pre: takes in date of tutor request
 	// post: returns the index of where the date is in 2d array
 	dateTimeIndex: function(date) {
 		var dateTime = new Date(date);
-		dateTime = dateTime.getMinutes() + dateTime.getUTCHours() * 2;
+		dateTime = Math.round(dateTime.getUTCHours() * 2 + dateTime.getMinutes() / 30);
 		return dateTime;
 	},
 	// pre: takes in date of tutor request
